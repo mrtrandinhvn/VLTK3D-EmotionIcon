@@ -49,8 +49,14 @@ function Controller() {
         "votay",
         "vui",
         "xaoquyet",
-        "xauho"
-    ];
+        "xauho",
+		"bad",
+		"battay",
+		"bia",
+		"chamthan",
+		"chuoi",
+		"win",
+	];
 
 
     this.onLoaded = function () {
