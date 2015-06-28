@@ -1,0 +1,20 @@
+{
+  "name": "VLTK 3D Emotions",
+  "version": "1.0",
+  "description": "VLTK3 Emotion importer",
+  "content_scripts": [
+    {
+      "matches": ["https://www.facebook.com/*",
+				  "http://www.facebook.com/*"
+				],
+      "css": ["css/EmoStyle.css"],
+      "js": [
+			  "js/jquery-1.11.3.min.js",
+                "js/chat-windows.js",
+                "js/controller.js",
+                "js/main.js"
+			]
+    }
+  ],
+  "manifest_version": 2
+}
