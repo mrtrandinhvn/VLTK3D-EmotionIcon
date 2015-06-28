@@ -41,9 +41,10 @@ $(document).ready(function () {
                 // check contain right emotion tag
                 var emoTag = "#" + emotionList[j];
                 var afterHasTagWord = outputHtml.indexOf(emoTag) + emotionList[j].length + 1; // +1 for '#'
+                var regex = new RegExp("[a-zA-Z0-9]");
                 if (
                     outputHtml.includes(emoTag + " ")
-                        || outputHtml.charAt(afterHasTagWord) == '<'
+                        || !outputHtml.charAt(afterHasTagWord).match(regex)
                         || outputHtml.length == afterHasTagWord
                 ) {
                     // replace text with image
