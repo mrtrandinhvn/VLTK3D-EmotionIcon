@@ -1,6 +1,6 @@
 {
     "name": "VLTK 3D Emotions",
-    "version": "1.4",
+    "version": "1.4.1",
     "description": "VLTK3 Emotion importer",
     "content_scripts": [
         {
