@@ -79,6 +79,12 @@ function Controller() {
         }
     }
 
+    this.generateHomePage = function (selector) {
+        for (var i = 0; i < emotionList.length; i++) {
+            var oneRowHtml = "<div class='one-row'><span class='emoticon emoticon_" + emotionList[i] + "'></span><span class='text'>" + "#" + emotionList[i] + "</span></div>";
+            $(selector).append(oneRowHtml);
+        }
+    }
     // private functions
     function replaceHtml(rowSelector) {
         var outputHtml = $(rowSelector).html();
