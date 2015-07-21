@@ -58,18 +58,22 @@ function Controller() {
 		"chuoi",
 		"win"
     ];
+
     // for local use
     var emotionList = this.EmotionList;
-
+    var loadedChatWindows = new ChatWindows();
+    var workingChatWindow = new ChatWindows();
+    var status = new Status(emotionList);
+    // public function
     this.onLoaded = function () {
-        var loadedChatWindows = new ChatWindows();
+        status.onLoaded();
         return loadedChatWindows.load();
     }
+
     this.onRunTime = function (changedElement) {
-        var workingChatWindow = new ChatWindows();
         return workingChatWindow.load(changedElement);
     }
-    // public function
+
     this.editSingleRow = function (rows) {
         for (var j = 0; j < rows.length; j++) {
             var replacedHtml = replaceHtml(rows[j]);
