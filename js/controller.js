@@ -1,6 +1,6 @@
 function Controller() {
-    // for global use
-    this.EmotionList = [
+    // database
+    var emotionList = [
         "ac",
         "biumoi",
         "botay",
@@ -58,19 +58,27 @@ function Controller() {
 		"chuoi",
 		"win"
     ];
+    var appManifest = chrome.runtime.getManifest();
+    // =========================== public function ================================
 
-    // for local use
-    var emotionList = this.EmotionList;
-    var loadedChatWindows = new ChatWindows();
-    var workingChatWindow = new ChatWindows();
-    var status = new Status(emotionList);
-    // public function
+    // return an object has this extension's manifest value
+    this.getManifest = function () {
+        return appManifest;
+    }
+    // getter - return a string array
+    this.EmotionList = function () {
+        return emotionList;
+    }
+    // run when document ready
     this.onLoaded = function () {
+        var status = new Status(emotionList);
         status.onLoaded();
+        var loadedChatWindows = new ChatWindows();
         return loadedChatWindows.load();
     }
 
     this.onRunTime = function (changedElement) {
+        var workingChatWindow = new ChatWindows();
         return workingChatWindow.load(changedElement);
     }
 
@@ -84,6 +92,7 @@ function Controller() {
     }
 
     this.generateHomePage = function (selector) {
+        $(selector).append("<div>Current version: " + appManifest.version + "</div>");
         for (var i = 0; i < emotionList.length; i++) {
             var oneRowHtml = "<div class='one-row'><span class='emoticon emoticon_" + emotionList[i] + "'></span><span class='text'>" + "#" + emotionList[i] + "</span></div>";
             $(selector).append(oneRowHtml);
