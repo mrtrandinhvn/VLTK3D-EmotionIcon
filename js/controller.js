@@ -51,12 +51,12 @@ function Controller() {
         "vui",
         "xaoquyet",
         "xauho",
-		"bad",
-		"battay",
-		"bia",
-		"chamthan",
-		"chuoi",
-		"win"
+        "bad",
+        "battay",
+        "bia",
+        "chamthan",
+        "chuoi",
+        "win"
     ];
     var appManifest = chrome.runtime.getManifest();
     // =========================== public function ================================
@@ -98,12 +98,13 @@ function Controller() {
             $(selector).append(oneRowHtml);
         }
     }
+
     // private functions
     function replaceHtml(rowSelector) {
         var outputHtml = $(rowSelector).html();
         if (outputHtml.includes("#")) { // check hashtag
             for (var j = 0; j < emotionList.length; j++) {
-                var emoHtml = "<span class='emoticon emoticon_" + emotionList[j] + "'></span>";
+                var emoHtml = "<span class='emoticon emoticon_" + emotionList[j] + "' title='#" + emotionList[j] + "'></span>";
                 // check contain right emotion tag
                 var emoTag = "#" + emotionList[j];
                 var afterHasTagWord = outputHtml.indexOf(emoTag) + emotionList[j].length + 1; // +1 for '#'
@@ -125,5 +126,54 @@ function Controller() {
     // replace all 'find' = 'replace' in 'inputStr'
     function replaceAll(inputStr, find, replace) {
         return inputStr.replace(new RegExp(find, 'g'), replace);
+    }
+
+    this.addRuntimeHandler = function () {
+        console.log("addRuntimeHandler");
+        var i;
+        var globalContainer = document.querySelector("#globalContainer");
+        // create an observer instance
+        var observer = new MutationObserver(function (mutations) {
+            mutations.forEach(function (mutation) {
+                var containers = mutation.target.querySelectorAll("a._58cn");
+                if (containers.length > 0) {
+                    console.log("------------------------------------------");
+                    for (i = 0; i < containers.length; i++) {
+                        if (containers[i].querySelectorAll("span").length == 2) {
+                            var index = isEmotionHashtag(containers[i].innerText);
+                            if (index > -1) {
+                                console.log(containers[i]);
+                                containers[i].innerHTML = getEmoticonHtml(emotionList, index);
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
+        // configuration of the observer:
+        var config = {
+            childList: true,
+            subtree: true
+        }
+        // pass in the target node, as well as the observer options
+        observer.observe(globalContainer, config);
+    }
+
+    // return index of that string if exists in array, else return -1
+    function contains(array, str) {
+        for (var i = 0; i < array.length; i++) {
+            if (array[i] == str) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    function isEmotionHashtag(hashtagString) {
+        return contains(emotionList, hashtagString.replace(/\W+/gi, "")); // remove '#' and special character
+    }
+    function getEmoticonHtml(list, index) {
+        return "<span class='emoticon emoticon_" + list[index] + "' title='#" + list[index] + "'></span>";
     }
 }

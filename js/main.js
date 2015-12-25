@@ -1,9 +1,10 @@
 $(document).ready(function () {
+    var i;
     var controller = new Controller();
     var result1 = controller.onLoaded();
     if (result1) {
         if (result1.chatRow.length) {
-            for (var i = 0; i < result1.chatRow.length; i++) {
+            for (i = 0; i < result1.chatRow.length; i++) {
                 controller.editSingleRow(result1.chatRow[i]);
             }
         }
@@ -20,4 +21,6 @@ $(document).ready(function () {
             }
         }
     });
+    // Add runtime handler for status and comment sections
+    controller.addRuntimeHandler();
 });

@@ -18,14 +18,14 @@ function Status(emotionList) {
 
     // private functions =================
     function replaceHtml(selector, emotionIndex) {
-        $(selector).html("<span class='emoticon emoticon_" + emotionList[emotionIndex] + "'></span>");
+        $(selector).html("<span class='emoticon emoticon_" + emotionList[emotionIndex] + "' title='#" + emotionList[emotionIndex] + "'></span>");
     }
 
     // check if array [array] contain string [str]
     // return index of that string if exists in array, else return -1
     function inArray(str, array) {
         for (var i = 0; i < array.length; i++) {
-            if (array[i].localeCompare(str) === 0) {
+            if (array[i] == str) {
                 return i;
             }
         }
