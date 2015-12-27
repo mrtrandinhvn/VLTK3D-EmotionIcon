@@ -129,7 +129,7 @@ function Controller() {
     }
 
     this.addRuntimeHandler = function () {
-        console.log("addRuntimeHandler");
+        //console.log("addRuntimeHandler");
         var i;
         var globalContainer = document.querySelector("#globalContainer");
         // create an observer instance
@@ -137,12 +137,12 @@ function Controller() {
             mutations.forEach(function (mutation) {
                 var containers = mutation.target.querySelectorAll("a._58cn");
                 if (containers.length > 0) {
-                    console.log("------------------------------------------");
+                    //console.log("------------------------------------------");
                     for (i = 0; i < containers.length; i++) {
                         if (containers[i].querySelectorAll("span").length == 2) {
                             var index = isEmotionHashtag(containers[i].innerText);
                             if (index > -1) {
-                                console.log(containers[i]);
+                                //console.log(containers[i]);
                                 containers[i].innerHTML = getEmoticonHtml(emotionList, index);
                             }
                         }
