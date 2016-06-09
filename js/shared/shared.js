@@ -56,8 +56,33 @@ var emotionList = [
     "bia",
     "chamthan",
     "chuoi",
-    "win"
-];
+    "win",
+    "bua",
+    "cf",
+    "chamhoi",
+    "daulau",
+    "den",
+    "dendo",
+    "denvang",
+    "denxanh",
+    "dua",
+    "duahau",
+    "good",
+    "heo",
+    "hoa",
+    "hoahong",
+    "kem",
+    "mattrang",
+    "mattroi",
+    "phaohoa",
+    "qua",
+    "ruou",
+    "tannat",
+    "tien",
+    "tim"
+].sort(function (a, b) {
+    return a.localeCompare(b);
+});
 function replaceHtml(selector, emotionIndex) {
     $(selector).html(getEmoticonHtml(emotionList, emotionIndex));
 }
@@ -93,7 +118,7 @@ function replaceNormalHashtagHtml(target) {
     return target;
 }
 function isEmotion(hashtagString) {
-    return contains(emotionList, hashtagString.replace(/\W+/gi, "")); // remove \"#\" and special character
+    return contains(emotionList, hashtagString.replace(/\W+/gi, "")); // remove \"#\" and special characters
 }
 // return index of that string if exists in array, else return -1
 function contains(array, str) {
