@@ -79,7 +79,8 @@ var emotionList = [
     "ruou",
     "tannat",
     "tien",
-    "tim"
+    "tim",
+	":v"
 ].sort(function (a, b) {
     return a.localeCompare(b);
 });
@@ -89,7 +90,7 @@ function replaceHtml(selector, emotionIndex) {
 // get used emoticon hashtags in an element's innerHTML
 function getUsedHashtagList(innerHtml) {
     var i;
-    var hashtagReg = RegExp(/#\w+/gi);
+    var hashtagReg = RegExp(/#\w+|:v/gi);
     var matches = innerHtml.match(hashtagReg);
     var result = [];
     if (matches && matches.length > 0) {
@@ -118,7 +119,7 @@ function replaceNormalHashtagHtml(target) {
     return target;
 }
 function isEmotion(hashtagString) {
-    return contains(emotionList, hashtagString.replace(/\W+/gi, "")); // remove \"#\" and special characters
+    return contains(emotionList, hashtagString.replace(/#/gi, "")); // remove \"#\"
 }
 // return index of that string if exists in array, else return -1
 function contains(array, str) {
@@ -130,7 +131,11 @@ function contains(array, str) {
     return -1;
 }
 function getEmoticonHtml(list, index) {
-    return "<span class=\"emoticon emoticon_" + list[index] + "\" title=\"" + list[index] + "\"></span>";
+	var emo = list[index];
+	if(emo == ":v"){
+		emo = "pacman";
+	}
+    return "<span class=\"emoticon emoticon_" + emo + "\" title=\"" + emo + "\"></span>";
 }
 // <=> $(document).ready(function(){});
 function onDocumentReady(callback, callbackArgs) {
